@@ -20,9 +20,10 @@ public class Evaluation {
 
 
     @Id
-    @GeneratedValue(generator="UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(generator="UUID")
+    //@GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private int id;
 
     private LocalDateTime creationDate = LocalDateTime.now();
 

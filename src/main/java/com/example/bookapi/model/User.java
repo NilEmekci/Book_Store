@@ -21,9 +21,10 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(generator="UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(generator="UUID")
+    //@GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private int id;
 
     @NotNull
     private String name;

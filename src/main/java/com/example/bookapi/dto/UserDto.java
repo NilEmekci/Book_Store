@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 public class UserDto {
 
-    private String id;
+    private int id;
 
     private String name;
 

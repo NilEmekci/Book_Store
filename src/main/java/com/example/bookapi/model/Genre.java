@@ -16,9 +16,10 @@ import java.util.List;
 public class Genre {
 
     @Id
-    @GeneratedValue(generator="UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+   // @GeneratedValue(generator="UUID")
+    //@GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private int id;
 
     private String name;
 

@@ -2,8 +2,8 @@ package com.example.bookapi.service;
 
 import com.example.bookapi.dto.BookDto;
 import com.example.bookapi.dto.BookRequest;
+import com.example.bookapi.model.Book;
 import com.example.bookapi.repository.BookRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +22,12 @@ public class BookService {
         return null;
 
     }
-    public List<String> getAllBooksNameByWriterId(Long writerId){
+    public List<String> getAllBooksNameByWriterId(int writerId){
         return bookRepository.findBooksByWriter(writerId);
+
+    }
+    public List<Book> getAllBooksNameByWriterName(String writerName){
+        return bookRepository.findBooksByWriterName(writerName);
 
     }
 /*

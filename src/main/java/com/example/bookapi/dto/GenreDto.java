@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GenreDto {
 
-    private String id;
+    private int id;
     private String name;
     private List<BookDto> books;
 

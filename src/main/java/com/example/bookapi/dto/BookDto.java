@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookDto {
 
-    private String id;
+    private int id;
 
     private String isbn;
 

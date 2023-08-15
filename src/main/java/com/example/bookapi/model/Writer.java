@@ -2,6 +2,7 @@ package com.example.bookapi.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,12 @@ import java.util.List;
 @Table(name="writer")
 public class Writer {
 
-    @Id
+
    // @GeneratedValue(generator="UUID")
     //@GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @NotNull
     private String name;
@@ -33,6 +36,9 @@ public class Writer {
 
     @OneToMany(mappedBy = "writer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book> books;
+
+    @Past
+    private LocalDateTime birthDate;
 
 
 

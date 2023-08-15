@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class WriterDto {
 
-    private Long id;
+    private int id;
 
     private String name;
 

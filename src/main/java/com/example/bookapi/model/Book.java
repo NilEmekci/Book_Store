@@ -23,9 +23,10 @@ public class Book {
 
 
     @Id
-    @GeneratedValue(generator="UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(generator="UUID")
+    //@GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private int id;
 
     @ISBN
     private String isbn;

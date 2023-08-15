@@ -24,13 +24,15 @@ public class WriterController {
         return writerService.getAll();
     }
 
-}
-/*
+
     @PostMapping("/add")
     public ResponseEntity<WriterDto> add(@Valid @RequestBody WriterRequest writerRequest) {
         return ResponseEntity.ok(writerService.add(writerRequest));
 
     }
+
+}
+/*
 
 
     @PostMapping("/updateSurname/{surname}")
