@@ -3,6 +3,7 @@ package com.example.bookapi.service;
 import com.example.bookapi.dto.WriterDto;
 import com.example.bookapi.dto.WriterConverter;
 import com.example.bookapi.dto.WriterRequest;
+import com.example.bookapi.exception.EntityNotFoundException;
 import com.example.bookapi.model.Writer;
 import com.example.bookapi.repository.WriterRepository;
 import jakarta.validation.Valid;
@@ -15,8 +16,8 @@ import java.util.List;
 public class WriterService {
 
     private final WriterRepository writerRepository;
-    private  final WriterConverter writerConverter;
-    private  final BookService bookService;
+    private final WriterConverter writerConverter;
+    private final BookService bookService;
 
 
     public WriterService(WriterRepository writerRepository, WriterConverter writerConverter, BookService bookService) {
@@ -34,33 +35,50 @@ public class WriterService {
 
     public WriterDto add(@Valid WriterRequest writerRequest) {
 
-        Writer writer= writerConverter.convertWriterRequestToWriter(writerRequest);
+        Writer writer = writerConverter.convertWriterRequestToWriter(writerRequest);
         writerRepository.save(writer);
 
         return writerConverter.convertWritertoWriterDto(writer);
 
     }
+
+    public WriterDto updateSurname(String surname, int id) {
+
+        writerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Writer not found with this id"));
+
+        Writer writer = writerRepository.findById(id).get();
+        writer.setSurname(surname);
+        writerRepository.save(writer);
+
+        return writerConverter.convertWritertoWriterDto(writer);
+
+    }
+
+    public void deleteById(int id) {
+        Writer writerToDelete = writerRepository.getById(id);
+        if (writerToDelete == null) {
+            throw new RuntimeException("User does not exist");
+        } else writerRepository.deleteById(id);
+
+    }
+
+    public WriterDto getByName(String name) {
+
+        Writer writer = writerRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException("Writer not found with this name"));
+        if (writer == null) {
+            throw new RuntimeException("Writer does not exist");
+        }
+        return writerConverter.convertWritertoWriterDto(writer);
+    }
+
+    public WriterDto getById(int id) {
+        Writer writer = writerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Writer not found with this id"));
+        if (writer == null) {
+            throw new RuntimeException("Writer does not exist");
+        }
+        return writerConverter.convertWritertoWriterDto(writer);
+
+    }
+
 }
-/*
-
-
-
-    public WriterDto updateSurname(WriterRequest writerRequest, String surname) {
-
-
-
-    }
-
-
-
-    public void deleteById(String id) {
-    }
-
-    public ResponseEntity<WriterDto> getByName(String name) {
-    }
-
-    public ResponseEntity<WriterDto> getById(String id) {
-    }
-
- */
 

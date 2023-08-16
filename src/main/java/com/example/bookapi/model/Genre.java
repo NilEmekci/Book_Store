@@ -24,7 +24,7 @@ public class Genre {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="book_genres",joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name = "genres_id") )
+    @JoinTable(name="book_genres",joinColumns = @JoinColumn(name = "book_id"),inverseJoinColumns = @JoinColumn(name = "genres_id"))
     private List<Book> books;
 
     private LocalDateTime creationDate = LocalDateTime.now();

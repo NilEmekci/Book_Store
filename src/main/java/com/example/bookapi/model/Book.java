@@ -41,7 +41,6 @@ public class Book {
     @NotNull
     private Writer writer;
 
-
     @Past
     private LocalDateTime releaseDate;
 

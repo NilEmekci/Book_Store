@@ -62,7 +62,7 @@ public class WriterConverter {
         newItem.setCreationDate(LocalDateTime.now());
         newItem.setBirthDate(from.getBirthDate());
 
-        List<Book> books =bookRepository.findBooksByWriterName(from.getName());
+        List<Book> books =bookRepository.findBooksByWriterName(from.getName(), from.getSurname());
         newItem.setBooks(books);
 
         return newItem;

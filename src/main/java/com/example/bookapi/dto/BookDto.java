@@ -21,15 +21,11 @@ public class BookDto {
 
     private String name;
 
-    private LocalDateTime creationDate = LocalDateTime.now();
-
     private String writerName;
 
     private LocalDateTime releaseDate;
 
-    private List<GenreDto> genres;
 
-    private List<Evaluation> evaluations;
 
 
 }
