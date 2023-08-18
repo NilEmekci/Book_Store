@@ -1,7 +1,6 @@
 package com.example.bookapi.controller;
-/*
-import com.example.bookapi.dto.GenreDto;
 
+import com.example.bookapi.dto.GenreDto;
 import com.example.bookapi.dto.GenreRequest;
 import com.example.bookapi.service.GenreService;
 import jakarta.validation.Valid;
@@ -23,18 +22,18 @@ public class GenreController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<GenreDto> getAll() {
+    public List<GenreDto> getAll() {
         return genreService.getAll();
     }
 
     @PostMapping("/add")
     public ResponseEntity<GenreDto> add(@Valid @RequestBody GenreRequest genreRequest){
-        return genreService.add(genreRequest);
+        return ResponseEntity.ok(genreService.add(genreRequest));
     }
 
     @PostMapping("/updateName/{name}")
-    public ResponseEntity<GenreDto> updateName(@RequestBody GenreRequest genreRequest, @PathVariable String name){
-        return genreService.updateName(genreRequest,name);
+    public ResponseEntity<GenreDto> updateName(@RequestBody String bookName, @PathVariable int id){
+        return ResponseEntity.ok(genreService.updateName(bookName,id));
     }
 
     @DeleteMapping("/deleteById/{id}")
@@ -43,16 +42,15 @@ public class GenreController {
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<GenreDto> getById(@PathVariable String id){
-        return genreService.getById(id);
+    public ResponseEntity<GenreDto> getById(@PathVariable int id){
+        return ResponseEntity.ok(genreService.getById(id));
 
     }
 
     @GetMapping("/getByName/{name}")
     public ResponseEntity<GenreDto> getByName(@PathVariable String name){
-        return genreService.getByName(name);
+        return ResponseEntity.ok(genreService.getByName(name));
     }
 
 
 }
-*/

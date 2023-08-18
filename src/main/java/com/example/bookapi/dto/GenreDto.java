@@ -1,7 +1,5 @@
 package com.example.bookapi.dto;
 
-import com.example.bookapi.model.Book;
-import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

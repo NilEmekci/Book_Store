@@ -3,8 +3,11 @@ package com.example.bookapi.service;
 import com.example.bookapi.dto.BookConverter;
 import com.example.bookapi.dto.BookDto;
 import com.example.bookapi.dto.BookRequest;
+import com.example.bookapi.exception.EntityAlreadyExistException;
 import com.example.bookapi.exception.EntityNotFoundException;
+import com.example.bookapi.exception.EntityNotNullException;
 import com.example.bookapi.model.Book;
+import com.example.bookapi.model.Writer;
 import com.example.bookapi.repository.BookRepository;
 import com.example.bookapi.repository.WriterRepository;
 import org.springframework.stereotype.Service;
@@ -34,8 +37,12 @@ public class BookService {
     }
     public BookDto add(BookRequest bookRequest) {
 
-        writerRepository.findById(bookRequest.getWriterId()).orElseThrow(()-> new EntityNotFoundException("Writer does not found with this id"));
-
+        if (bookRequest.getName() == null || bookRequest.getName().isBlank() ) {
+            throw new EntityNotNullException("Book name cannot be null or blank");
+        }
+        if(isBookExist(bookRequest.getName(), bookRequest.getWriterId())){
+            throw new EntityAlreadyExistException("Book already exist ");
+        }
         Book book = bookConverter.convertBookRequestToBook(bookRequest);
         bookRepository.save(book);
 
@@ -44,6 +51,9 @@ public class BookService {
 
     public BookDto updateName(String bookName, int id) {
 
+        if (bookName == null || bookName.isBlank() ) {
+            throw new EntityNotNullException("Book name cannot be null or blank");
+        }
         Book book = bookRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Book not found with this id"));
         book.setName(bookName);
         bookRepository.save(book);
@@ -53,6 +63,9 @@ public class BookService {
 
     public BookDto getByName(String name) {
 
+        if (name == null || name.isBlank() ) {
+            throw new EntityNotNullException("Book name cannot be null or blank");
+        }
         Book book =bookRepository.findByName(name).orElseThrow(()->new EntityNotFoundException("Book not found with this name"));
         if (book == null) {
             throw new RuntimeException("Book does not exist");
@@ -63,8 +76,10 @@ public class BookService {
 
     public BookDto getByISBN(String isbn) {
 
+        if (isbn == null || isbn.isBlank() ) {
+            throw new EntityNotNullException("ISBN cannot be null or blank");
+        }
         Book book =bookRepository.findByIsbn(isbn).orElseThrow(()->new EntityNotFoundException("Book not found with this isbn"));
-
         if (book == null) {
             throw new RuntimeException("Book does not exist");
         }
@@ -73,9 +88,9 @@ public class BookService {
 
     public void deleteById(int id) {
 
-        Book bookToDelete = bookRepository.getById(id);
+        Book bookToDelete = bookRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Book not found with this id"));
         if (bookToDelete == null) {
-            throw new RuntimeException("User does not exist");
+            throw new RuntimeException("Book does not exist");
         } else bookRepository.deleteById(id);
 
     }
@@ -89,5 +104,18 @@ public class BookService {
 
     }
 
+    private boolean isBookExist(String bookName,int writerId){
+
+         if (bookRepository.findByName(bookName).isPresent() && writerRepository.findById(writerId).isPresent()){
+            Book book = bookRepository.findByName(bookName).get();
+            Writer writer = book.getWriter();
+            if(writerId == writer.getId()){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
 
 }
