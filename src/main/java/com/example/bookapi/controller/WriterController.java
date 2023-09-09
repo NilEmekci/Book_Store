@@ -26,7 +26,7 @@ public class WriterController {
     public ResponseEntity<WriterDto> add(@Valid @RequestBody WriterRequest writerRequest) {
         return ResponseEntity.ok(writerService.add(writerRequest));
     }
-    @PostMapping("/updateSurname/{id}")
+    @PutMapping("/updateSurname/{id}")
     public ResponseEntity<WriterDto> updateSurname(@Valid @RequestBody String surname, @PathVariable int id) {
         return ResponseEntity.ok(writerService.updateSurname(surname, id));
     }

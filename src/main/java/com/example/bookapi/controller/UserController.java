@@ -30,7 +30,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/updateSurname/{surname}")
+    @PutMapping("/updateSurname/{surname}")
     public ResponseEntity<UserDto> updateSurname(@Valid @RequestBody UserRequest userRequest,@PathVariable String name){
         return userService.updateSurname(userRequest,name);
 

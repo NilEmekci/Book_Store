@@ -35,13 +35,13 @@ public class EvaluationController {
         evaluationService.deleteById(id);
     }
 
-    @PostMapping("/updateRating/{rating}")
+    @PutMapping("/updateRating/{rating}")
     public ResponseEntity<EvaluationDto> updateRating(@Valid @RequestBody EvaluationRequest evaluationRequest,
                                                       @PathVariable String rating){
         return evaluationService.updateRating(evaluationRequest,rating);
     }
 
-    @PostMapping("/updateMessage/{message}")
+    @PutMapping("/updateMessage/{message}")
     public ResponseEntity<EvaluationDto> updateMessage(@Valid @RequestBody EvaluationRequest evaluationRequest,
                                                        @PathVariable String message){
         return evaluationService.updateMessage(evaluationRequest,message);

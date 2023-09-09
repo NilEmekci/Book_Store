@@ -24,7 +24,7 @@ public class CustomExceptionHandler {
         List<String> detail = new ArrayList<>();
         detail.add(entityNotFoundException.getMessage());
         ResponseError responseError = new ResponseError("Entity Not Found", detail);
-        return new ResponseEntity<>(responseError, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(responseError, HttpStatus.NOT_FOUND);
 
 
     }
@@ -35,7 +35,7 @@ public class CustomExceptionHandler {
         detail.add(entityAlreadyException.getMessage());
 
         ResponseError responseError = new ResponseError("Entity Already Exist", detail);
-        return new ResponseEntity<>(responseError, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(responseError, HttpStatus.CONFLICT);
 
     }
 

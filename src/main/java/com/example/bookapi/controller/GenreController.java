@@ -31,7 +31,7 @@ public class GenreController {
         return ResponseEntity.ok(genreService.add(genreRequest));
     }
 
-    @PostMapping("/updateName/{name}")
+    @PutMapping("/updateName/{name}")
     public ResponseEntity<GenreDto> updateName(@RequestBody String bookName, @PathVariable int id){
         return ResponseEntity.ok(genreService.updateName(bookName,id));
     }

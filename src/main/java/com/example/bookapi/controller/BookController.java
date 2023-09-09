@@ -31,7 +31,7 @@ public class BookController {
 
     }
 
-    @PostMapping("/updateName/{name}")
+    @PutMapping("/updateName/{name}")
     public ResponseEntity<BookDto> updateName(@Valid @RequestBody String bookName,@PathVariable int id){
         return ResponseEntity.ok(bookService.updateName(bookName,id));
 
