@@ -1,6 +1,6 @@
 package com.example.bookapi.config;
 
-import com.example.bookapi.repository.UserRepository;
+import com.example.bookapi.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

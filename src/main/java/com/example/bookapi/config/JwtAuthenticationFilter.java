@@ -1,7 +1,6 @@
 package com.example.bookapi.config;
 
-import com.example.bookapi.repository.TokenRepository;
-import com.example.bookapi.service.JwtService;
+import com.example.bookapi.token.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
