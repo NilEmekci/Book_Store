@@ -26,7 +26,6 @@ import java.io.IOException;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
-
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -38,7 +37,7 @@ public class AuthenticationService {
                 .surname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+                .role(request.getRole())
                 .build();
         var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

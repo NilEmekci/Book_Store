@@ -1,5 +1,6 @@
 package com.example.bookapi.writer;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -14,11 +15,11 @@ import java.time.LocalDateTime;
 public class WriterRequest {
 
 
-    @Max(30)
-    @Min(value =2,message = "Name should greater than 2 character")
+    //@Max(30)
+    //@Min(value =2,message = "Name should greater than 2 character")
     private String name;
 
-    @Min(value =2,message = "Surname should greater than 2 character")
+    //@Min(value =2,message = "Surname should greater than 2 character")
     private String surname;
 
     private LocalDateTime birthDate;
