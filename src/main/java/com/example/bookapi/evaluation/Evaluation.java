@@ -35,10 +35,10 @@ public class Evaluation {
     private int rating;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_mail")
     private User user;
 
-    private boolean isBookEvaluation = true ;
+    private boolean isBookEvaluation;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "book_id")

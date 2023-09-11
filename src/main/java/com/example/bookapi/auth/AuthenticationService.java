@@ -1,7 +1,9 @@
 package com.example.bookapi.auth;
 
 
+import com.example.bookapi.exception.EntityAlreadyExistException;
 import com.example.bookapi.exception.EntityNotFoundException;
+import com.example.bookapi.exception.EntityNotNullException;
 import com.example.bookapi.user.Role;
 import com.example.bookapi.token.Token;
 import com.example.bookapi.token.TokenType;
@@ -9,6 +11,7 @@ import com.example.bookapi.user.User;
 import com.example.bookapi.token.TokenRepository;
 import com.example.bookapi.user.UserRepository;
 import com.example.bookapi.config.JwtService;
+import com.example.bookapi.writer.Writer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +36,16 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+        if (request.getFirstname() == null || request.getLastname() == null || request.getFirstname().isBlank() ||request.getLastname().isBlank()) {
+            throw new EntityNotNullException("Name or surname cannot be null or blank");
+        }
+        if(request.getEmail() == null ||request.getEmail().isBlank() ){
+            throw new EntityNotNullException("email cannot be null or blank");
+        }
+        if(isUserExist(request.getFirstname(), request.getLastname(), request.getEmail())){
+            throw new EntityAlreadyExistException("User already exist ");
+        }
         var user= User.builder()
                 .name(request.getFirstname())
                 .surname(request.getLastname())
@@ -107,4 +121,19 @@ public class AuthenticationService {
             }
         }
     }
+
+    private boolean isUserExist(String firstName ,String lastName, String email){
+
+        if(userRepository.findByName(firstName).isPresent() ){
+            User user = userRepository.findByName(firstName).get();
+            boolean checkSurname = user.getSurname().equals(lastName);
+            if(checkSurname){
+                return user.getEmail().equals(email);
+            }
+            return false;
+        }
+        return false;
+    }
+
+
 }

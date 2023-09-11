@@ -30,11 +30,22 @@ public class BookApplication {
 					.firstname("Admin")
 					.lastname("Admin")
 					.email("admin@gmail.com")
-					.password("password")
+					.password("1")
 					.role(Role.ADMIN)
 					.build();
 			System.out.println("Admin token: " + service.register(admin).getAccessToken());
+
+			var user = RegisterRequest.builder()
+					.firstname("User")
+					.lastname("User")
+					.email("user@gmail.com")
+					.password("1")
+					.role(Role.USER)
+					.build();
+			System.out.println("User token: " + service.register(user).getAccessToken());
 		};
+
+
 	}
 
 }

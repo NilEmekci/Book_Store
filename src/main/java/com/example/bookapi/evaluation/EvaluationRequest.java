@@ -9,13 +9,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EvaluationRequest {
 
-    private String userNickName;
+    private String userEmail;
 
     private boolean isBookEvaluation;
 
-    private int rating;
+    private int bookId;
+
+    private int writerId;
 
     private String message;
+
+    private int rating;
+
 
 
 

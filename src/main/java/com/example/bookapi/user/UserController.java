@@ -1,13 +1,11 @@
 package com.example.bookapi.user;
-/*
-import com.example.bookapi.Book.BookDto;
-import com.example.bookapi.Book.BookRequest;
-import com.example.bookapi.dto.UserDto;
-import com.example.bookapi.dto.UserRequest;
-import com.example.bookapi.service.UserService;
+
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/user")
@@ -22,26 +20,19 @@ public class UserController {
 
     @GetMapping("/getAll")
     @PreAuthorize("hasAnyAuthority('user:read','admin:read')")
-    public ResponseEntity<UserDto> getAll(){
+    public List<UserDto> getAll(){
         return userService.getAll();
     }
 
-    @PostMapping("/add")
-    @PreAuthorize("hasAuthority('admin:create')")
-    public ResponseEntity<UserDto> add(@Valid @RequestBody UserRequest userRequest){
-        return userService.add(userRequest);
-
-    }
-
-    @PutMapping("/updateSurname/{surname}")
+    @PutMapping("/updateSurname/{id}")
     @PreAuthorize("hasAnyAuthority('user:create','admin:create')")
-    public ResponseEntity<UserDto> updateSurname(@Valid @RequestBody UserRequest userRequest,@PathVariable String name){
-        return userService.updateSurname(userRequest,name);
+    public ResponseEntity<UserDto> updateSurname(@Valid @RequestBody UserRequest userRequest,@PathVariable int id){
+        return ResponseEntity.ok(userService.updateSurname(userRequest,id));
 
     }
     @DeleteMapping("/deleteById/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
-    public void deleteById(@PathVariable String id){
+    public void deleteById(@PathVariable int id){
         userService.deleteById(id);
 
     }
@@ -49,17 +40,16 @@ public class UserController {
     @GetMapping("/getByName/{name}")
     @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<UserDto> getByName(@PathVariable String name){
-        return userService.getByName(name);
+        return ResponseEntity.ok(userService.getByName(name));
 
     }
 
     @GetMapping("/getById/{id}")
     @PreAuthorize("hasAuthority('admin:read')")
-    public ResponseEntity<UserDto> getById(@PathVariable String id){
-        return userService.getById(id);
+    public ResponseEntity<UserDto> getById(@PathVariable int id){
+        return ResponseEntity.ok(userService.getById(id));
 
     }
 
 
 }
-*/

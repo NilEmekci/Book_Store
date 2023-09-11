@@ -28,7 +28,6 @@ public class BookService {
 
         List<Book> books = bookRepository.findAll();
         return bookConverter.convertTolistBookToBookDto(books);
-
     }
     public BookDto add(BookRequest bookRequest) {
 

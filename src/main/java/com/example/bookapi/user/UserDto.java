@@ -18,8 +18,6 @@ public class UserDto {
 
     private String surname;
 
-    private String nickName;
-
     private String email;
 
     private String password;
